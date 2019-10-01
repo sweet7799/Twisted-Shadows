@@ -1,160 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-void status(int o_health, int p_health)
-{
-  //Prints out current health of player and opponent and move choices
-  printf("\nOpponent's Health: %d\n", o_health);
-  printf("Your Health: %d\n\n", p_health);
-
-  printf("Select a move:\n");
-  printf("1.Slash (13-18 damage)\n");
-  printf("2.Charge (8-23 damage)\n");
-  printf("3.Heal (Restore 10-15)\n\n");
-}
-
-void turn(int *o_ptr, int *p_ptr)
-{
-	char input[20];
-	int damage;
-	int healing;
-	char one[] = "1";
-	char slash[] = "Slash";
-	char two[] = "2";
-	char charge[] = "Charge";
-	char three[] = "3";
-	char heal[] = "Heal";
-	char quit[] = "exit";	
-	time_t t;
-	srand((unsigned) time(&t));
-	scanf("%20s", input);
-
-	if(strcmp(input, one) == 0)
-	{
-	  damage = (rand() % (18 - 13 + 1)) + 13;
-	  *o_ptr = *o_ptr - damage;
-          system("clear");
-	  printf("You dealt\033[1;31m %d\033[0m damage\n", damage);
-	}
-	else if(strcmp(input, slash) == 0)
-	{
-	  damage = (rand() % (18 - 13 + 1)) + 13;
-	  *o_ptr = *o_ptr - damage;
-          system("clear");
-	  printf("You dealt\033[1;31m %d\033[0m damage\n", damage);
-	}
-	else if(strcmp(input, two) == 0)
-	{
-	  damage = (rand() % (18 - 13 + 1)) + 13;
-	  *o_ptr = *o_ptr - damage;
-          system("clear");
-	  printf("You dealt\033[1;31m %d\033[0m damage\n", damage);
-	}
-	else if(strcmp(input, charge) == 0)
-	{
-	  damage = (rand() % (23 - 8 + 1)) + 8;
-	  *o_ptr = *o_ptr - damage;
-          system("clear");
-	  printf("You dealt\033[1;31m %d\033[0m damage\n", damage);
-	}
-	else if(strcmp(input, three) == 0)
-	{
-	  healing = (rand() % (15 - 10 + 1)) + 10;
-	  *p_ptr = *p_ptr + healing;
-          system("clear");
-	  printf("You healed\033[0;32m %d\033[0m health points\n", healing);
-	}
-	else if(strcmp(input, heal) == 0)
-	{
-	  healing = (rand() % (15 - 10 + 1)) + 10;
-	  *p_ptr = *p_ptr + healing;
-          system("clear");
-	  printf("You healed\033[0;32m %d\033[0m health points\n", healing);
-	}
-	else if(strcmp(input, quit) == 0)
-	{
-		exit(0);
-	} 
-	else
-	{
-	  printf("Invalid Input\n");
-	  turn(o_ptr, p_ptr);
-	}
-}
-void oturn(int *o_ptr, int *p_ptr)
-{
-  int damage;
-  int healing;
-  time_t t;
-  srand((unsigned) time(&t));
-  int selection;
-
-  selection = rand() % 6;
-  if(*o_ptr < 35)
-  {
-    if(selection < 4)
-    {
-      healing = (rand() % (15 - 10 + 1)) + 10;
-      *o_ptr = *o_ptr + healing;
-      printf("Your opponent healed\033[0;32m %d\033[0m health points\n", healing);
-    }
-    else if(selection == 4)
-    {
-      damage = (rand() % (18 - 13 + 1)) + 13;
-      *p_ptr = *p_ptr - damage;
-      printf("Your opponent dealt\033[1;31m %d\033[0m damage\n", damage);
-    }
-    else
-    {
-      damage = (rand() % (23 - 8 + 1)) + 8;
-      *p_ptr = *p_ptr - damage;
-      printf("Your opponent dealt\033[1;31m %d\033[0m damage\n", damage);
-    }
-  }
-  else
-  {
-    if(selection < 2)
-    {
-      healing = (rand() % (15 - 10 + 1)) + 10;
-      *o_ptr = *o_ptr + healing;
-      printf("Your opponent healed\033[0;32m %d\033[0m health points\n", healing);
-    }
-    else if(selection < 4)
-    {
-      damage = (rand() % (18 - 13 + 1)) + 13;
-      *p_ptr = *p_ptr - damage;
-      printf("Your opponent dealt\033[1;31m %d\033[0m damage\n", damage);
-    }
-    else
-    {
-      damage = (rand() % (23 - 8 + 1)) + 8;
-      *p_ptr = *p_ptr - damage;
-      printf("Your opponent dealt\033[1;31m %d\033[0m damage\n", damage);
-    }
-  }
-
-}
+#include "combat.h"
+#include "start.h"
 
 int main(void)
 {
-  system("clear");
-  int opponent = 100;
-  int player = 100;
-  while(opponent > 0 && player > 0)
-  {
-    status(opponent, player);
-    turn(&opponent, &player);
-    oturn(&opponent, &player);
-  }
+  int snail_health = 100;
+  int char_health;
+  int char_class;
+  //char name[20]
+  int status[10] = { };
+  //      0          1        2        3      4      5      6      7      8        9
+  // [P. Health][P. Max][O. Health][O. Max][Class][Enemy][Bash][Poison][Salve][M. Shield]
 
-  if(opponent < 0)
+//Start of Game
+
+  system("clear");
+
+  printf("Welcome to \033[1;31mTwisted Shadows\033[0m\n\n");
+  printf("Press ENTER to continue\n");
+  getchar();
+  system("clear");
+  //printf("What is your character's name?\n");
+  //scanf("%20s", name);
+  //char_class = class();
+  status[4] = class();
+  //char_health = set_health(char_class);
+  status[0] = set_health(status[4]);
+  status[1] = set_health(status[4]);
+
+  //Set up Snail
+  status[2] = 100;
+  status[3] = 100;
+  //char_health = combat(char_health, snail_health, char_class);
+  status[0] = combat(status);
+  system("clear");
+  if(status[0] <= 0)
   {
-    printf("\nVictory!\n");
+    printf("Defeat\n");
+    getchar();
   }
   else
   {
-    printf("\nDefeat\n");
+    printf("You won with %d Health Points\n", status[0]);
+    getchar();
   }
 
   return 0;
