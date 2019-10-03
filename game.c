@@ -8,7 +8,7 @@ int main(void)
   int snail_health = 100;
   int char_health;
   int char_class;
-  //char name[20]
+  char name[20];
   int status[10] = { };
   //      0          1        2        3      4      5      6      7      8        9
   // [P. Health][P. Max][O. Health][O. Max][Class][Enemy][Bash][Poison][Salve][M. Shield]
@@ -21,8 +21,8 @@ int main(void)
   printf("Press ENTER to continue\n");
   getchar();
   system("clear");
-  //printf("What is your character's name?\n");
-  //scanf("%20s", name);
+  printf("What is your character's name?\n");
+  scanf("%20s", name);
   //char_class = class();
   status[4] = class();
   //char_health = set_health(char_class);
@@ -42,7 +42,8 @@ int main(void)
   }
   else
   {
-    printf("You won with %d Health Points\n", status[0]);
+    printf("%s won with %d Health Points\n", name, status[0]);
+    //printf("You won with %d Health Points\n", status[0]);
     getchar();
   }
 
