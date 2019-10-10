@@ -32,9 +32,45 @@ _________¶¶¶¶¶¶¶¶¶¶¶_____¶¶¶¶¶¶¶¶¶¶¶______¶\n\
 _____________¶¶__¶¶¶¶___________________¶¶¶\n\
 ____________________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n");
 
+// |████████████████████████████████|
+  float bar1;
+  int bar2;
 
+  bar1 = (float)stats[2]/stats[3]*10;
+  printf("bar1: %f", bar1);
+  bar2 = 10 - bar1;
+  printf("bar2: %d\n", bar2);
   printf("Opponent's Health: %d/%d\n", stats[2], stats[3]);
-  printf("Your Health: %d/%d\n\n", stats[0], stats[1]);
+  printf(" ____________________\n");
+  printf("|");
+  for(int counter = 0; counter < bar1; counter++)
+  {
+    printf("██");
+  }
+  for(int counter2 = 0; counter2 < bar2; counter2++)
+  {
+    printf("  ");
+  }
+  printf("|\n");
+  printf(" ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n");
+
+  bar1 = (float)stats[0]/stats[1]*10;
+
+  bar2 = 10 - bar1;
+
+  printf("Your Health: %d/%d\n", stats[0], stats[1]);
+  printf(" ____________________\n");
+  printf("|");
+  for(int counter3 = 0; counter3 < bar1; counter3++)
+  {
+    printf("██");
+  }
+  for(int counter4 = 0; counter4 < bar2; counter4++)
+  {
+    printf("  ");
+  }
+  printf("|\n");
+  printf(" ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n");
 }
 
 void cleric(int stats[])
