@@ -37,9 +37,9 @@ ____________________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶\n\n");
   int bar2;
 
   bar1 = (float)stats[2]/stats[3]*10;
-  printf("bar1: %f", bar1);
+
   bar2 = 10 - bar1;
-  printf("bar2: %d\n", bar2);
+
   printf("Opponent's Health: %d/%d\n", stats[2], stats[3]);
   printf(" ____________________\n");
   printf("|");
